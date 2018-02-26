@@ -10,6 +10,7 @@ RUN sed -i 's/archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list
 
 # Install necessary library
 RUN apt-get update
+RUN apt-get -y install apt-utils
 RUN apt-get -y install git
 RUN apt-get -y install python python-dev python-pip
 RUN apt-get -y install lib32z1 libglib2.0-dev libsm6 libxrender1 libxext6 libice6 libxt6 libfontconfig1 libcups2 
@@ -24,7 +25,7 @@ RUN cp -f pip.conf /root/.pip/
 
 # Install necessary python-library
 RUN pip install --upgrade pip
-RUN pip install numpy scipy matplotlib scikit-learn scikit-image
+RUN pip install numpy scipy matplotlib pillow
 RUN pip install opencv-python
 RUN pip install ipython==5.5.0
 RUN pip install jupyter
