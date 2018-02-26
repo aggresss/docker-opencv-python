@@ -1,0 +1,43 @@
+# Use Ubuntu:16.04 image as parent image
+FROM ubuntu:16.04
+
+ENV AUTHOR aggresss
+
+# Modify apt-get to aliyun mirror
+WORKDIR /
+RUN sed -i 's/archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list
+
+# Install necessary library
+RUN apt-get update
+RUN apt-get isntall -y git
+RUN apt-get install -y python python-dev python-pip
+RUN apt-get install -y lib32z1 libglib2.0-dev libsm6 libxrender1 libxext6 libice6 libxt6 libfontconfig1 libcups2 
+
+# Clone the docker-opencv-python repository
+RUN git clone https://github.com/aggresss/docker-opencv-python.git /docker-opencv-python
+
+# Modify pip mirror
+WORKDIR /docker-opencv-python
+RUN mkdir -p /root/.pip
+RUN cp -f pip.conf /root/.pip/
+
+# Install necessary python-library
+RUN pip install --upgrade pip
+RUN pip install numpy scipy matplotlib scikit-learn scikit-image
+RUN pip install tensorflow
+RUN pip install opencv-python
+RUN pip install h5py keras
+RUN pip install ipython==5.5.0
+RUN pip install jupyter
+
+# Modify Jupter run arguments
+WORKDIR /docker-opencv-python
+RUN mkdir -p /root/.jupyter
+RUN cp -f jupyter_config.py /root/.jupyter/
+RUN mkdir -p /root/volume
+
+# Make startup run file
+WORKDIR /docker-opencv-python
+RUN cp -f run.sh /
+RUN chmod +x /run.sh
+CMD /run.sh
