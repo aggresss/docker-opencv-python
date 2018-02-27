@@ -9,4 +9,4 @@ services:
     ports:
       - "18881:8888"
     volumes:
-      - /data/volume/opencv_python:/home/volume
+      - /data/volume/opencv_python:/root/volume
