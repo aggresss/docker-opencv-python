@@ -1,0 +1,12 @@
+#docker-compose -f xxxxx.yml up -d
+
+version: '2'
+services:
+  opencv-python:
+    image: aggresss/opencv-python
+    privileged: true
+    command: /run.sh
+    ports:
+      - "18881:8888"
+    volumes:
+      - /data/volume/opencv_python:/home/volume
