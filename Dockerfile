@@ -7,10 +7,14 @@ ENV DEBIAN_FRONTEND noninteractive
 # Modify apt-get to aliyun mirror
 WORKDIR /
 RUN sed -i 's/archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list
-RUN echo "Asia/shanghai" > /etc/timezone
+RUN apt-get update
+
+# Modify timezone to GTM+8
+ENV TZ=Asia/Shanghai
+RUN apt-get -y install tzdata
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Install necessary library
-RUN apt-get update
 RUN apt-get -y install apt-utils
 RUN apt-get -y install git
 RUN apt-get -y install python python-dev python-pip
