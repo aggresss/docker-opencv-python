@@ -7,6 +7,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # Modify apt-get to aliyun mirror
 WORKDIR /
 RUN sed -i 's/archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list
+RUN echo "Asia/shanghai" > /etc/timezone
 
 # Install necessary library
 RUN apt-get update
