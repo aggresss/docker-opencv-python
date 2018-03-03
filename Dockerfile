@@ -1,8 +1,13 @@
 # Use Ubuntu:16.04 image as parent image
 FROM ubuntu:16.04
 
-ENV AUTHOR aggresss
+
+MAINTAINER AUTHOR aggresss
 ENV DEBIAN_FRONTEND noninteractive
+
+EXPOSE 8888 
+VOLUME /root/volume
+USER root
 
 # Modify apt-get to aliyun mirror
 WORKDIR /
@@ -42,4 +47,7 @@ RUN pip install jupyter jupyterlab
 WORKDIR /docker-opencv-python
 RUN cp -f run.sh /
 RUN chmod +x /run.sh
+WORKDIR /root/volume
 CMD /run.sh
+
+
