@@ -8,5 +8,6 @@ services:
     command: /run.sh
     ports:
       - "18881:8888"
+      - "60006:6006"
     volumes:
       - /data/volume/opencv_python:/root/volume

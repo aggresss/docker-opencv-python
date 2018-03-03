@@ -6,6 +6,7 @@ MAINTAINER AUTHOR aggresss
 ENV DEBIAN_FRONTEND noninteractive
 
 EXPOSE 8888 
+EXPOSE 6006
 VOLUME /root/volume
 USER root
 
