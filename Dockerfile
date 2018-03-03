@@ -36,7 +36,6 @@ RUN cp -f pip.conf /root/.pip/
 WORKDIR /docker-opencv-python
 RUN mkdir -p /root/.jupyter
 RUN cp -f jupyter_config.py /root/.jupyter/
-RUN mkdir -p /root/volume
 
 # Install necessary python-library
 RUN pip install --upgrade pip
