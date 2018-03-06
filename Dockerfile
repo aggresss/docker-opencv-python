@@ -37,7 +37,10 @@ RUN apt-get -y install apt-utils python python-dev python-pip \
 
 # Modify pip mirror
 RUN mkdir -p /root/.pip
-RUN cp -f pip.conf /root/.pip/
+RUN echo "[global]" > /root/.pip/pip.conf && \
+    echo "index-url=http://mirrors.aliyun.com/pypi/simple/" >> /root/.pip/pip.conf && \
+    echo "[install]" >> /root/.pip/pip.conf && \
+    echo "trusted-host=mirrors.aliyun.com" >> /root/.pip/pip.conf
 
 # Modify Jupter run arguments
 RUN mkdir -p /root/.jupyter
