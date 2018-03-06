@@ -26,12 +26,14 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # Modify locale
 RUN apt-get -y install locales
 RUN locale-gen en_US.UTF-8
-RUN cp -f locale /etc/default/
+RUN echo "LANG=\"en_US.UTF-8\"" > /etc/default/locale && \
+    echo "LANGUAGE=\"en_US:en\"" >> /etc/default/locale && \
+    echo "LC_ALL=\"en_US.UTF-8\"" >> /etc/default/locale
 
 # Install necessary library
 RUN apt-get -y install apt-utils python python-dev python-pip \
-	lib32z1 libglib2.0-dev libsm6 libxrender1 \
-	libxext6 libice6 libxt6 libfontconfig1 libcups2 
+    lib32z1 libglib2.0-dev libsm6 libxrender1 \
+    libxext6 libice6 libxt6 libfontconfig1 libcups2 
 
 # Modify pip mirror
 RUN mkdir -p /root/.pip
