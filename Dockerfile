@@ -44,7 +44,15 @@ RUN echo "[global]" > /root/.pip/pip.conf && \
 
 # Modify Jupter run arguments
 RUN mkdir -p /root/.jupyter
-RUN cp -f jupyter_config.py /root/.jupyter/
+RUN echo "# Jupyter config file" > /root/.jupyter/jupyter_config.py && \
+    echo "c.NotebookApp.ip = '*'" >> /root/.jupyter/jupyter_config.py && \
+    echo "c.NotebookApp.notebook_dir = u'/root/volume'" >> /root/.jupyter/jupyter_config.py && \
+    echo "c.NotebookApp.open_browser = False" >> /root/.jupyter/jupyter_config.py && \
+    echo "c.NotebookApp.allow_root = True">> /root/.jupyter/jupyter_config.py && \
+    echo "c.NotebookApp.port = 8888">> /root/.jupyter/jupyter_config.py && \
+    echo "# default password: 12345678">> /root/.jupyter/jupyter_config.py && \
+    echo "c.NotebookApp.password = u'sha1:d501736a80f9:2bf882737f5ded39b8d1803b0c3ca385325fbfa8'" >> \
+    /root/.jupyter/jupyter_config.py
 
 # Install necessary python-library
 RUN pip install --upgrade pip
