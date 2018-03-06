@@ -60,7 +60,8 @@ RUN pip install numpy scipy matplotlib pillow opencv-python ipython==5.5.0 tenso
 RUN pip install jupyter jupyterlab
 
 # Make startup run file
-RUN cp -f run.sh /
+RUN echo '#!/bin/sh' > /run.sh && \
+    echo "nohup jupyter notebook" >> /run.sh
 RUN chmod +x /run.sh
 WORKDIR /root/volume
 CMD /run.sh
